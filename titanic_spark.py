@@ -11,7 +11,10 @@ from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 ###########################################################################################################
 
 # create spark session
-spark = SparkSession.builder.appName("Titanic Data Analysis").getOrCreate()
+spark = SparkSession \
+    .builder \
+    .appName("Titanic Data with Spark") \
+    .getOrCreate()
 
 # dataset definition
 titanic_schema = StructType([
@@ -32,8 +35,8 @@ titanic_schema = StructType([
 # Replace 'path/to/titanic.csv' with the actual path to your Titanic dataset
 titanic_df = spark.read.csv('data/train.csv', header=True, schema=titanic_schema)
 
-# showing the spark df
-titanic_df.show()
+# showing the spark df in a Pandas DF format
+titanic_df.toPandas()
 
 ###########################################################################################################
 ######################################## PREPROCESSING OF THE DATA ########################################
